@@ -1,0 +1,74 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update PIC Topic{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-3 mb-2">
+                <h3>Update PIC Topic</h3>
+                <br>
+                <p class="fw-bold fs-5">Topic : {{ topic.topic_name }}</p>
+            </div>
+            <div class="col-12">
+                <div>
+                    <a href="{% url 'pica:update_topic' meeting.id topic.id op %}" class="btn btn-success">Back to
+                        Update
+                        Topic</a>
+                </div>
+            </div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>PIC Available</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>PIC Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in all_users_non_bod %}
+                        {% if user not in user_in_topic and user.is_superuser == False %}
+                            <tr>
+                                <td>{{ user.first_name }}&nbsp;{{ user.last_name }}</td>
+                                <td>
+                                    <a href="{% url 'pica:add_pic_to_topic' topic.id user.id op %}"
+                                       class="btn btn-success">Add</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1 mt-5"></div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>PIC in Topic</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>PIC Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user_meet in user_in_topic %}
+                        <tr>
+                            <td>{{ user_meet.first_name }}&nbsp;{{ user_meet.last_name }}</td>
+                            <td>
+                                <a href="{% url 'pica:delete_pic_from_topic' topic.id user_meet.id op %}"
+                                   class="btn btn-danger">Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Complete Approve{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 500px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 bg-light mt-3 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-2">List Complete Approve</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <form action="">
+                    <div class="row align-items-end">
+                        <div class="form-group col-3 fw-bold">
+                            <label for="forum_name">Forum Name : </label>
+                            <select id="forum_name" class="form-control" name="forum_id">
+                                <option selected>Choose...</option>
+                                {% for forum in forums %}
+                                    <option value={{ forum.id }}>{{ forum.forum_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-2 fw-bold">
+                            <label for="bulan">Month : </label>
+                            <select id="bulan" class="form-control" name="bulan">
+                                <option selected>Choose...</option>
+                                <option value=1>January</option>
+                                <option value=2>February</option>
+                                <option value=3>March</option>
+                                <option value=4>April</option>
+                                <option value=5>May</option>
+                                <option value=6>June</option>
+                                <option value=7>July</option>
+                                <option value=8>August</option>
+                                <option value=9>September</option>
+                                <option value=10>October</option>
+                                <option value=11>November</option>
+                                <option value=12>December</option>
+                            </select>
+                        </div>
+                        <div class="col-2 fw-bold">
+                            <label for="tahun">Year : </label>
+                            <input type="number" min=2020 class="form-control"
+                                   id="tahun"
+                                   name="tahun">
+                        </div>
+                        <div class="col-2">
+                            <label for="submit"></label>
+                            <button type="submit" class="btn btn-dark"><i
+                                    class="fa-solid fa-magnifying-glass fa-lg"></i>&nbsp;Search
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="scroll">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th>Forum Name</th>
+                            <th>Meeting Date</th>
+                            <th>Starting Time</th>
+                            <th>End Time</th>
+                            <th>Notulen</th>
+                            <th>Location</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for meeting in meetings %}
+                            <tr>
+                                <td>{{ meeting.meeting2forum.forum_name }}</td>
+                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                <td>{{ meeting.end_time | time:"G:i" }}</td>
+                                <td>{{ meeting.notulen }}</td>
+                                <td>{{ meeting.location }}</td>
+                                <td><a href="{% url 'pica:create_pdf' meeting.id %}"
+                                       class="btn btn-outline-danger"><i
+                                        class="fa-solid fa-file-pdf fa-xl"></i>&nbsp;&nbsp;pdf</a>
+                                </td>
+                                <td><a href="{% url 'pica:export_to_excel' meeting.id %}"
+                                       class="btn btn-outline-success"><i class="fa-solid fa-file-excel fa-lg"></i>&nbsp;&nbsp;Excel</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

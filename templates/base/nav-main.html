@@ -1,0 +1,208 @@
+{% load static %}
+<style>
+    .logo-nav {
+        width: 50px;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="{% url 'pica:dashboard' %}" class="navbar-brand"><img class="rounded-3 logo-nav nav-img"
+                                                                       src="{% static 'img/logo_epica_new.png' %}"
+                                                                       alt=""
+                                                                       style="width: 100px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% if request.user.is_authenticated %}
+                <ul class="navbar-nav me-auto">
+                    {% for grp in request.user.groups.all %}
+                        {% if grp.name == "Secretary" %}
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Meeting
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:list_meeting' 'I' %}" class="dropdown-item">Create</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_meeting' 'O' %}" class="dropdown-item">History</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:status_approval' %}" class="dropdown-item">Approval
+                                        Status</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if grp.name == "CPMD" %}
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Master
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:list_company' %}" class="dropdown-item">Company</a></li>
+                                    <li><a href="{% url 'users:list_department' %}" class="dropdown-item">Division</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Meeting
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:list_meeting' 'I' %}" class="dropdown-item">Create</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_meeting' 'O' %}" class="dropdown-item">History</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:status_approval' %}" class="dropdown-item">Approval
+                                        Status</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_complete_approve' 'O' %}" class="dropdown-item">Complete
+                                        Approve</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_outside' %}" class="dropdown-item">Outside
+                                        Participant</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    PICA
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:search_all' %}" class="dropdown-item">Search</a></li>
+                                    <li class="dropdown dropend">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           id="navbar-dropdown-list-deep-1"
+                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Outstanding
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="navbar-dropdown-link">
+                                            <li><a href="{% url 'pica:overdue_all_pica' %}"
+                                                   class="dropdown-item">Overdue</a></li>
+                                            <li><a href="{% url 'pica:ongoing_all_pica' %}" class="dropdown-item">On
+                                                Going</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if grp.name == "PIC ePica" %}
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Master
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:list_company' %}" class="dropdown-item">Company</a></li>
+                                    <li><a href="{% url 'users:list_department' %}" class="dropdown-item">Division</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_forum' %}" class="dropdown-item">Forum</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    Meeting
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:list_meeting' 'I' %}" class="dropdown-item">Create</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_meeting' 'O' %}" class="dropdown-item">History</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:status_approval' %}" class="dropdown-item">Approval
+                                        Status</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_complete_approve' %}" class="dropdown-item">Complete
+                                        Approve</a>
+                                    </li>
+                                    <li><a href="{% url 'pica:list_outside' %}" class="dropdown-item">Outside
+                                        Participant</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark fs-5" id="navbar-dropdown-link"
+                                   role="button"
+                                   data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                                    PICA
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbar-dropdown-link">
+                                    <li><a href="{% url 'pica:search_all' %}" class="dropdown-item">Search</a></li>
+                                    <li class="dropdown dropend">
+                                        <a href="#" class="dropdown-item dropdown-toggle"
+                                           id="navbar-dropdown-list-deep-1"
+                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Outstanding
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="navbar-dropdown-link">
+                                            <li><a href="{% url 'pica:overdue_all_pica' %}"
+                                                   class="dropdown-item">Overdue</a></li>
+                                            <li><a href="{% url 'pica:ongoing_all_pica' %}" class="dropdown-item">On
+                                                Going</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                        {% if grp.name == "BOD" %}
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5"
+                                   href="{% url 'pica:list_meeting_pending' %}">Approval</a>
+                            </li>
+                        {% endif %}
+                        {% if grp.name == "PIC" %}
+                            <li class="nav-item text-white fs-5">
+                                <a class="nav-link" href="{% url 'pica:list_activity' %}">Activity</a>
+                            </li>
+                            <li class="nav-item text-white fs-5">
+                                <a class="nav-link" href="{% url 'pica:list_notes' %}">Notes</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown dropstart">
+                        <a class="nav-link dropdown-toggle text-dark fs-5" data-bs-toggle="dropdown" href="#"
+                           role="button"
+                           aria-haspopup="true" aria-expanded="false">Profile</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'users:pwdchange' %}">Change Password</a></li>
+                            <li><a class="dropdown-item" href="{% url 'users:edit_profile' %}">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        {% if user.user2profile.photo.name != '' %}
+                            <picture><img class="border rounded-circle" src="{{ user.user2profile.photo.url }}"
+                                          alt="b"
+                                          style="width: 50px;"></picture>
+                        {% else %}
+                            <picture><img class="border rounded-circle" src="{% static 'img/user-3.png' %}"
+                                          alt="b"
+                                          style="width: 50px;"></picture>
+                        {% endif %}
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fs-5" href="{% url 'users:login' %}">Login</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>

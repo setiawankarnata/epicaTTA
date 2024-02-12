@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Input PIC PICA{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Input PIC PICA</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Full Name :</label>
+                                {% render_field form.full_name placeholder="Full Name" class+="form-control" %}
+                            </div>
+                            <br>
+                            <div class="col-12 mt-3">
+                                <label class="form-label">Email :</label>
+                                {% render_field form.email placeholder="Email" class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-success mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:dashboard' %}"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

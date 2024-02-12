@@ -1,0 +1,98 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Incoming Meeting{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 bg-light mt-3 px-5">
+                {% if op == "I" %}
+                    <div class="text-center fs-4 fw-bold mb-3 mt-3">Incoming Meeting</div>
+                {% else %}
+                    <div class="text-center fs-4 fw-bold mb-3 mt-3">History Meeting</div>
+                {% endif %}
+                <br>
+                <div>
+                    {% if op == "I" %}
+                        <a href="{% url 'pica:input_meeting' op %}" class="btn btn-warning"><i
+                                class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add Meeting</a>
+                    {% endif %}
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <div class="scroll">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th>MoM Ref#</th>
+                            <th>Forum Name</th>
+                            <th>Meeting Date</th>
+                            <th>Starting Time</th>
+                            <th>End Time</th>
+                            <th>Notulen</th>
+                            <th>Location</th>
+                            <th></th>
+                            <th></th>
+                            <th>Action</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for meeting in meetings %}
+                            <tr>
+                                <td>{{ meeting.ref_no }}</td>
+                                <td>{{ meeting.meeting2forum.forum_name }}</td>
+                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                <td>{{ meeting.end_time | time:"G:i" }}</td>
+                                <td>{{ meeting.notulen }}</td>
+                                <td>{{ meeting.location }}</td>
+                                <td><a href="{% url 'pica:update_meeting' meeting.id op %}"
+                                       class="btn btn-outline-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-primary'
+                                       href="{% url 'pica:search_participant' meeting.id op %}"><i
+                                            class="fa-solid fa-users"></i>&nbsp;&nbsp;Internal</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-success'
+                                       href="{% url 'pica:update_outside_participant' meeting.id op %}"><i
+                                            class="fa-solid fa-users"></i>&nbsp;&nbsp;External</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-secondary' href="{% url 'pica:list_topic' meeting.id op %}"><i
+                                            class="fa-solid fa-list-check"></i>&nbsp;&nbsp;Topics</a>
+                                </td>
+                                {% if op == "O" and not secretary %}
+                                    <td>
+                                        <a class='btn btn-outline-info'
+                                           href="{% url 'pica:finish_check' meeting.id op %}"><i
+                                                class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Finish
+                                            Check</a>
+                                    </td>
+                                {% endif %}
+                                <td>
+                                    <a class='btn btn-light' href="{% url 'pica:input_attachment' meeting.id op %}"><i
+                                            class="fa-solid fa-paperclip fa-lg"></i>&nbsp;&nbsp;Attachments</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

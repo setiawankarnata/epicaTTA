@@ -1,0 +1,54 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Edit Workflow{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5 bg-light mt-3 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-3">Edit Workflow</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Forum :</label>
+                                <strong>{{ current_forum.forum_name }}</strong>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-bold">BOD :</label>
+                                <strong>{{ current_workflow.bod_name }}</strong>
+                            </div>
+                            <br>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Position :</label>
+                                {% render_field form.position placeholder="Position" class+="form-control" %}
+                            </div>
+                            <div class="col-3 mt-3">
+                                <label class="form-label">Sequence No. :</label>
+                                {% render_field form.sequence_no placeholder="Sequence No." class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_workflow' current_forum.id %}"><i
+                                                class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

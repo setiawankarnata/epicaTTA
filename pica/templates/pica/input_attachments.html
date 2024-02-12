@@ -1,0 +1,89 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Meeting Material Attachments{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 bg-light mt-3 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-3 mt-3">Meeting Material Attachments</legend>
+                        <div>
+                            <h6>Forum : {{ meeting.meeting2forum.forum_name }}</h6>
+                            <h6>Date : {{ meeting.meeting_date|date:"l, d M Y" }}</h6>
+                        </div>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-6 mt-3">
+                                <label class="form-label">File Attachment (only pdf files and max total size : 25 Mb)
+                                    :</label>
+                                {% render_field form.files class+="form-control" %}
+                                <div class="text-center text-danger">
+                                    {{ form.files.errors }}
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>Uploaded Files:</h6>
+                                <table class="table table-bordered table-secondary">
+                                    <thead>
+                                    <tr>
+                                        <th>Name of file</th>
+                                        <th class="text-end">Size</th>
+                                        <th class="text-end">Action</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    {% for lampiran in lampirans %}
+                                        <tr>
+                                            <td>{{ lampiran.nama_file }}</td>
+                                            <td class="text-end">{{ lampiran.lampir.size|filesizeformat }}</td>
+                                            <td class="text-center"><a href="{{ lampiran.lampir.url }}"
+                                                                       class="btn btn-primary"
+                                                                       target="_blank"><i
+                                                    class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                            </td>
+                                            <td class="text-center"><a
+                                                    href="{% url 'pica:delete_lampiran' meeting.id op lampiran.id %}"
+                                                    class="btn btn-danger"><i
+                                                    class="fa-solid fa-trash fa-lg"></i>&nbsp;Remove</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot class="table-group-divider">
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-end">Total size : {{ total_size|floatformat:2 }} MB</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_meeting' op %}"><i class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base/base.html" %}
+{% block title %}Log-in{% endblock %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <script>
+            window.location.href = '{% url "pica:dashboard" %}';
+        </script>
+    {% endif %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light px-5 mt-5">
+                <form action="{% url 'login' %}" method="post">
+                    <fieldset>
+                        <legend class="fw-bold fs-4 mt-5 text-center">Login</legend>
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-primary" role="alert">
+                                Error: Username or Password not correct!
+                            </div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label class="mb-2 form-label">Username/Email</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-1">
+                            <label class="mb-2 form-label">{{ form.password.label }}</label>
+                            {{ form.password }}
+                        </div>
+                        <div class="text-center mt-1">
+                            <button class="btn text-bg-dark py-2 mb-4 mt-5 fw-bold"
+                                    type="submit">
+                                <i class="fa-solid fa-right-to-bracket"></i>&nbsp;
+                                Sign in
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+                <br>
+                <p>Forgot your password? <span><a href="{% url "users:password_reset" %}">Click here to reset your password</a></span>
+                </p>
+                <hr class="mb-3">
+                <p class="small text-center">By signing in to your account, you agree to ePica
+                    <a
+                            href="">Terms of
+                        Service</a> and
+                    consent to
+                    our <a href="">Cookie Policy</a> and <a href="">Privacy Policy</a>. This
+                    site is
+                    not
+                    protected
+                    by reCAPTCHA and intend to use internally only.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

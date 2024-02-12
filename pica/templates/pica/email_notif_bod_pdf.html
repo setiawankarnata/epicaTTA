@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Minutes of Meeting</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 1cm 1cm 1cm 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+
+        .header {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header-detail {
+            font-size: 14px;
+        }
+
+        .table-data {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    <div class="row mt-3">
+        <div class="col-12 text-center mb-2">
+            <header class="header">
+                <p>Minutes of Meeting {{ meeting.meeting2forum.forum_name }}</p>
+            </header>
+        </div>
+        <div class="col-6 header-detail">
+            <p>Meeting date : {{ meeting.meeting_date|date:"l, d M Y" }}</p>
+        </div>
+        <div class="col-6 header-detail">
+            <p>Meeting time : {{ meeting.start_time|time:"G:i" }} to {{ meeting.end_time|time:"G:i" }} </p>
+        </div>
+        <div class="col-6 header-detail">
+            <p>Location : {{ meeting.location }}</p>
+        </div>
+        <div class="col-6 header-detail">
+            <p>Notulen : {{ meeting.notulen }}</p>
+        </div>
+        <div class="col-12 header-detail">
+            <p>Participants:</p>
+        </div>
+        <div class="col-12 header-detail">
+            <p>
+                {% for peserta in meeting.meeting2user.all %}
+                    {{ peserta.first_name }} {{ peserta.last_name }},&nbsp;&nbsp;
+                {% endfor %}
+            </p>
+        </div>
+        <div class="col-12 table-data">
+            <table class="table table-striped detail-mom table-bordered">
+                <thead>
+                <tr>
+                    <th>Issue Date</th>
+                    <th>Div/Dept.</th>
+                    <th>Company</th>
+                    <th>Topic</th>
+                    <th>Problem Identification</th>
+                    <th>Corrective Action</th>
+                    <th>Due Date</th>
+                    <th>PIC</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                        <td>{{ topic.topic2department.name }}</td>
+                        <td>{{ topic.topic2company.name }}</td>
+                        <td>{{ topic.topic_name }}</td>
+                        <td>{{ topic.problem_info }}</td>
+                        <td>{{ topic.action }}</td>
+                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                        <td>
+                            {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

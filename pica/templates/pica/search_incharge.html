@@ -1,0 +1,152 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Input/Update PIC Inputter{% endblock %}
+{% block content %}
+    <style>
+        :root {
+            --bs-pagination-color: black;
+        }
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-6">
+                <a href="{% url 'pica:list_topic' meeting.id op %}" class="btn btn-warning mt-3"><i
+                        class="fa-solid fa-floppy-disk fa-lg"></i>&nbsp;&nbsp;Save</a>
+                <form action="">
+                    <div class="fs-3 fw-bold text-center mt-2">
+                        <fieldset>
+                            <legend>Input/Update PIC Inputter</legend>
+                        </fieldset>
+                    </div>
+                    <div class="row text-center mt-2 mb-2">
+                        <div class="col-5 input-group">
+                            <input type="search" id="floatInput" class="form-control" name="q_all"
+                                   placeholder="Search name of participant">
+                            <label for="floatInput"></label>
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-6 text-center">
+                <h5>Available Participants</h5>
+                <div class="scroll">
+                    <table class="table table-striped text-start" style="background-color: white">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for usr in available_user %}
+                            <tr>
+                                <td>{{ usr.first_name }}</td>
+                                <td>{{ usr.last_name }}</td>
+                                <td><a href="{% url 'pica:add_inputter_to_topic' meeting.id op topic.id usr.id 'S' %}"
+                                       class="btn btn-outline-primary"><i
+                                        class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;PIC Inputter</a></td>
+                                <td><a href="{% url 'pica:add_incharge_to_topic' meeting.id op topic.id usr.id %}"
+                                       class="btn btn-outline-success"><i
+                                        class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;PIC PICA</a></td>
+                                <td><a href="{% url 'pica:add_inputter_to_topic' meeting.id op topic.id usr.id 'B' %}"
+                                       class="btn btn-outline-secondary"><i class="fa-solid fa-check-double fa-lg"></i>&nbsp;&nbsp;Both</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {#                <nav>#}
+                {#                    <ul class="pagination justify-content-center">#}
+                {#                        {% if topics.has_previous %}#}
+                {#                            <li class="page-item"><a href="?page={{ topics.previous_page_number }}"#}
+                {#                                                     class="page-link">Previous</a>#}
+                {#                            </li>#}
+                {#                        {% endif %}#}
+                {#                        {% for item in page_range %}#}
+                {#                            {% if item == topics.number %}#}
+                {#                                <li class="page-item active"><a href="?page={{ item }}"#}
+                {#                                                                class="page-link">{{ item }}</a>#}
+                {#                                </li>#}
+                {#                            {% else %}#}
+                {#                                <li class="page-item"><a href="?page={{ item }}" class="page-link">{{ item }}</a></li>#}
+                {#                            {% endif %}#}
+                {#                        {% endfor %}#}
+                {#                        {% if topics.has_next %}#}
+                {#                            <li class="page-item"><a href="?page={{ topics.next_page_number }}"#}
+                {#                                                     class="page-link">Next</a>#}
+                {#                            </li>#}
+                {#                        {% endif %}#}
+                {#                    </ul>#}
+                {#                </nav>#}
+            </div>
+            <div class="col-1"></div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <h5>PIC Inputter</h5>
+                        </div>
+                        <table class="table border border-1 border-dark" style="background-color: white">
+                            <thead>
+                            <tr class="table-secondary">
+                                <th>PIC Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user_topic in user_in_topic %}
+                                <tr>
+                                    <td>{{ user_topic.first_name }}&nbsp;{{ user_topic.last_name }}</td>
+                                    <td>
+                                        <a href="{% url 'pica:delete_inputter_from_topic' meeting.id op topic.id user_topic.id %}"
+                                           class="btn btn-outline-danger"><i
+                                                class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <div class="text-center">
+                            <h5>PIC PICA</h5>
+                        </div>
+                        <table class="table border border-1 border-dark" style="background-color: white">
+                            <thead>
+                            <tr class="table-secondary">
+                                <th>PIC Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user_incharge in user_in_incharge %}
+                                <tr>
+                                    <td>{{ user_incharge.first_name }}&nbsp;{{ user_incharge.last_name }}</td>
+                                    <td>
+                                        <a href="{% url 'pica:delete_incharge_from_topic' meeting.id op topic.id user_incharge.id %}"
+                                           class="btn btn-outline-danger"><i
+                                                class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

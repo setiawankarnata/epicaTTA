@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Topics Review{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-5 mt-5">List Topics Review</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:list_meeting_pending' %}" class="btn btn-primary"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;Back to List Meeting</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Department</th>
+                        <th>Company</th>
+                        <th>Problem Identification</th>
+                        <th>Corrective Action</th>
+                        <th>Due Date</th>
+                        <th>PIC</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in topics %}
+                        <tr>
+                            <td>{{ topic.topic_name }}</td>
+                            <td>{{ topic.topic2department.name }}</td>
+                            <td>{{ topic.topic2company.name }}</td>
+                            <td>{{ topic.problem_info }}</td>
+                            <td>{{ topic.action }}</td>
+                            <td>{{ topic.due_date|date:"d M Y" }}</td>
+                            <td>
+                                {% if topic.topic2user %}
+                                    {% for pic in topic.topic2user.all %}
+                                        {{ pic.first_name }} {{ pic.last_name }},
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                            <td><a href="{% url 'pica:review_topic' topic.id approval.id %}" class="btn btn-warning"><i
+                                    class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

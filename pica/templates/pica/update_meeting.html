@@ -1,0 +1,76 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Meeting{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Update
+                            Meeting
+                        </legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Forum Name :</label>
+                                <strong>{{ meeting.meeting2forum.forum_name }}</strong>
+                            </div>
+                            <br>
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Peserta :</label>
+                                {% if meeting.meeting2user %}
+                                    {% for pic in meeting.meeting2user.all %}
+                                        {{ pic.first_name }} {{ pic.last_name }},
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Meeting Date :</label>
+                                {% render_field form.meeting_date type="date" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Start Time :</label>
+                                {% render_field form.start_time type="time" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">End Time :</label>
+                                {% render_field form.end_time type="time" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Notulen :</label>
+                                {% render_field form.notulen placeholder="Notulen" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Location :</label>
+                                {% render_field form.location placeholder="Location" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Reference No :</label>
+                                <br>
+                                <strong>{{ refno }}</strong>
+                            </div>
+                            <div class="row mb-5 mt-5">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-center">
+                                        <div>
+                                            <button class="btn btn-warning mx-3"
+                                                    type="submit"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-danger mx-3"
+                                               href="{% url 'pica:list_meeting' op %}"><i class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

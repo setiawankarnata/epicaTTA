@@ -1,0 +1,301 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Status Approval MoM{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <h3 class="text-center">Status Incomplete BoD MoM Approval</h3>
+        <br>
+        <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+            to Dashboard</a>
+        <br>
+        <br>
+        <div class="accordion" id="accordionDefault">
+            {% for forum in forum_list %}
+                {% if forum.forum_name == "BOD TTA" %}
+                    {% if tta_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultOne">
+                                <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultOne" aria-expanded="true"
+                                        aria-controls="collapseDefaultOne">
+                                    <h5 style="color: #000">Tuah Turangga Agung (TTA) - Total Incomplete Approval
+                                        : {{ tta_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultOne" class="accordion-collapse collapse show"
+                                 aria-labelledby="headingDefaultOne"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in tta_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if forum.forum_name == "BOD ABB" %}
+                    {% if abb_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultTwo">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultTwo" aria-expanded="false"
+                                        aria-controls="collapseDefaultTwo">
+                                    <h5 style="color: #000">Asmin Bara Bronang (ABB) - Total Incomplete Approval
+                                        : {{ abb_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultTwo" class="accordion-collapse collapse"
+                                 aria-labelledby="headingDefaultTwo"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in abb_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if forum.forum_name == "BOD SMM" %}
+                    {% if smm_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                        aria-controls="collapseDefaultThree">
+                                    <h5 style="color: #000">Suprabari Mapanindo Mineral (SMM) - Total Incomplete
+                                        Approval
+                                        : {{ smm_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                                 aria-labelledby="headingDefaultThree"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in smm_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if forum.forum_name == "BOD TOP" %}
+                    {% if top_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                        aria-controls="collapseDefaultThree">
+                                    <h5 style="color: #000">Telen Orbit Prima (TOP) - Total Incomplete Approval
+                                        : {{ top_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                                 aria-labelledby="headingDefaultThree"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in top_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if forum.forum_name == "BOD KCM" %}
+                    {% if kcm_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                        aria-controls="collapseDefaultThree">
+                                    <h5 style="color: #000">Kadya Caraka Mulia (KCM) - Total Incomplete Approval
+                                        : {{ kcm_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                                 aria-labelledby="headingDefaultThree"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in kcm_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if forum.forum_name == "BOD PMM" %}
+                    {% if pmm_count %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDefaultThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                        aria-controls="collapseDefaultThree">
+                                    <h5 style="color: #000">Prima Multi Mineral (PMM) - Total Incomplete Approval
+                                        : {{ pmm_count }}</h5>
+                                </button>
+                            </h2>
+                            <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                                 aria-labelledby="headingDefaultThree"
+                                 data-bs-parent="#accordionDefault">
+                                <div class="accordion-body">
+                                    <table class="table table-light">
+                                        <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Location</th>
+                                            <th>Notulen</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for meeting in pmm_meetings %}
+                                            <tr>
+                                                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                                                <td>{{ meeting.start_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.end_time| time:"G:i" }}</td>
+                                                <td>{{ meeting.location }}</td>
+                                                <td>{{ meeting.notulen }}</td>
+                                                <td><a href="{% url 'pica:cek_status_approval' meeting.id %}"
+                                                       class="btn btn-outline-success"><i
+                                                        class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Notification for PIC Inputter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .notification {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .information {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+
+        table,
+        th,
+        td {
+            padding: 5px;
+            border: 1px solid #000;
+            font-size: 16px;
+        }
+
+        .button {
+            text-align: center;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 30px;
+        }
+
+        .link_epica {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .detail-mom th {
+            background-color: #e6aa00;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<main class="container">
+    {% if topics %}
+        <header>
+            <div class="logo">
+                {#            <img src="cid:logo_epica_new.png" alt="" width="100" height="100">#}
+                <h3 class="notification">Notifications from ePica System</h3>
+            </div>
+        </header>
+        <article class="information">
+            <p>ePica System informed you that you have the following topics that need to be followed up soon. Details
+                are shown below:
+            </p>
+            <br>
+        </article>
+        <table class="table table-striped detail-mom table-bordered">
+            <thead>
+            <tr>
+                <th>Issue Date</th>
+                <th>Division</th>
+                <th>Company</th>
+                <th>Topic</th>
+                <th>Problem Identification</th>
+                <th>Corrective Action</th>
+                <th>Due Date</th>
+                <th>PIC</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.topic2meeting.meeting_date|date:"d M Y" }}</td>
+                    <td>{{ topic.topic2department.name }}</td>
+                    <td>{{ topic.topic2company.name }}</td>
+                    <td>{{ topic.topic_name }}</td>
+                    <td>{{ topic.problem_info }}</td>
+                    <td>{{ topic.action }}</td>
+                    <td>{{ topic.due_date|date:"d M Y" }}</td>
+                    <td>
+                        {{ topic.topic2user.first_name }} {{ topic.topic2user.last_name }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</main>
+</body>
+
+</html>

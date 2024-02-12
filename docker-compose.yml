@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/epica
+    ports:
+      - "8000:8000"
+    environment:
+      - CELERY_BROKER=redis://redis:6379/0
+      - CELERY_BACKEND=redis://redis:6379/0
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    image: app:epica
+    container_name: epica_container
+    command: gunicorn epicaTTA.wsgi:application --bind 0.0.0.0:8000 --timeout=5 --threads=10
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    image: nginx:latest
+    links:
+      - app
+
+  celery:
+    build: .
+    command: sh -c "celery -A epicaTTA worker -l INFO" && "celery -A epicaTTA beat -l INFO"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - app
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+
+
+

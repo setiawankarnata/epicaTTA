@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List PIC Forum{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-3 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-3">List PIC CPMD</div>
+                <br>
+                <div class="fw-bold mb-3 fs-5">
+                    Forum : {{ forum.forum_name }}
+                </div>
+                <div>
+                    <a href="{% url 'pica:update_cpmd' forum.id %}" class="btn btn-warning"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add/Remove PIC</a>
+                    <a href="{% url 'pica:list_forum' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Forum</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Tim Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cpmd in cpmd_in_forum %}
+                        <tr>
+                            <td>{{ cpmd.first_name }} {{ cpmd.last_name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

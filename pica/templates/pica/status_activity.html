@@ -1,0 +1,70 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Status Activity{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 bg-secondary text-white mt-5">
+                <div class="text-center fs-4">
+                    Status Activity
+                </div>
+                <table class="table table-light mt-3">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if activities %}
+                        {% for activity in activities %}
+                            <tr>
+                                <td>{{ activity.activity_date|date:"d M Y" }}</td>
+                                <td>{{ activity.action_description }}</td>
+                                <td>
+                                    {% if activity.having_attachments == "Y" %}
+                                        <a href="{% url 'pica:list_activity_attachment' activity.id meeting.id %}" class="btn btn-light"><i
+                                                class="fa-solid fa-paperclip"></i>&nbsp;&nbsp;Attachments</a>
+                                        <br>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td>There is no activity.</td>
+                            <td></td>
+                        </tr>
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            {% if op == 1 %}
+                <div class="col-2 mt-5">
+                    <a href="{% url 'pica:search_all' %}" class="btn btn-danger"><i
+                            class="fa-solid fa-arrow-left-long fa-lg"></i>&nbsp;&nbsp;Back to
+                        Search</a>
+                </div>
+            {% endif %}
+            {% if op == 2 %}
+                <div class="col-2 mt-5">
+                    <a href="{% url 'pica:overdue_all_pica' %}" class="btn btn-danger"><i
+                            class="fa-solid fa-arrow-left-long fa-lg"></i>&nbsp;&nbsp;Back to
+                        Search</a>
+                </div>
+            {% endif %}
+            {% if op == 3 %}
+                <div class="col-2 mt-5">
+                    <a href="{% url 'pica:ongoing_all_pica' %}" class="btn btn-danger"><i
+                            class="fa-solid fa-arrow-left-long fa-lg"></i>&nbsp;&nbsp;Back to
+                        Search</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

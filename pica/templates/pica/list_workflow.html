@@ -1,0 +1,48 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Workflow{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-3 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-3">List Workflow</div>
+                <br>
+                <div class="fw-bold fs-5 mb-3">
+                    Forum : {{ forum.forum_name }}
+                </div>
+                <div>
+                    <a href="{% url 'pica:update_workflow' forum.id %}" class="btn btn-warning"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add Workflow</a>
+                    <a href="{% url 'pica:list_forum' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Forum</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>BOD Name</th>
+                        <th>Position</th>
+                        <th>Sequence No</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for workflow in current_workflow %}
+                        <tr>
+                            <td>{{ workflow.bod_name }}</td>
+                            <td>{{ workflow.position }}</td>
+                            <td>{{ workflow.sequence_no }}</td>
+                            <td><a href="{% url 'pica:edit_workflow' workflow.id forum.id %}"
+                                   class="btn btn-outline-warning"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

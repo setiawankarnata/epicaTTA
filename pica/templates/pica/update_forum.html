@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Forum{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Update Forum</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Forum Name :</label>
+                                <strong>{{ forum.forum_name }}</strong>
+                            </div>
+                            <br>
+                            <div class="col-12 mt-3">
+                                <label class="form-label">Description :</label>
+                                {% render_field form.description placeholder="Description" class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3" href="{% url 'pica:list_forum' %}"><i
+                                                class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

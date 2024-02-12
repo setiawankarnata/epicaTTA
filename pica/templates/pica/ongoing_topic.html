@@ -1,0 +1,498 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Outstanding PICA All TTA{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <h3 class="text-center">On Going PICA All Company</h3>
+        <br>
+        <div class="accordion" id="accordionDefault">
+            {% if tta %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultOne">
+                        <button type="button" class="accordion-button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultOne" aria-expanded="true"
+                                aria-controls="collapseDefaultOne">
+                            <h5 style="color: #000">Tuah Turangga Agung (TTA) - Total On going : {{ tta_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultOne" class="accordion-collapse collapse show"
+                         aria-labelledby="headingDefaultOne"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in tta %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if abb %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultTwo">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultTwo" aria-expanded="false"
+                                aria-controls="collapseDefaultTwo">
+                            <h5 style="color: #000">Asmin Bara Bronang (ABB) - Total On going : {{ abb_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultTwo" class="accordion-collapse collapse" aria-labelledby="headingDefaultTwo"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in abb %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if smm %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultThree">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                aria-controls="collapseDefaultThree">
+                            <h5 style="color: #000">Suprabari Mapanindo Mineral (SMM) - Total On going
+                                : {{ smm_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                         aria-labelledby="headingDefaultThree"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in smm %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if top %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultThree">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                aria-controls="collapseDefaultThree">
+                            <h5 style="color: #000">Telen Orbit Prima (TOP) - Total On going : {{ top_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                         aria-labelledby="headingDefaultThree"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in top %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if kcm %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultThree">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                aria-controls="collapseDefaultThree">
+                            <h5 style="color: #000">Kadya Caraka Mulia (KCM) - Total On going : {{ kcm_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                         aria-labelledby="headingDefaultThree"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in kcm %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if pmm %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDefaultThree">
+                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDefaultThree" aria-expanded="false"
+                                aria-controls="collapseDefaultThree">
+                            <h5 style="color: #000">Prima Multi Mineral (PMM) - Total On going : {{ pmm_count }}</h5>
+                        </button>
+                    </h2>
+                    <div id="collapseDefaultThree" class="accordion-collapse collapse"
+                         aria-labelledby="headingDefaultThree"
+                         data-bs-parent="#accordionDefault">
+                        <div class="accordion-body">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>Division</th>
+                                    <th>Company</th>
+                                    <th>Problem Identification</th>
+                                    <th>Corrective Action</th>
+                                    <th>Due Date</th>
+                                    <th>PIC</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Activity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for topic in pmm %}
+                                    <tr>
+                                        <td>{{ topic.topic_name }}</td>
+                                        <td>{{ topic.topic2department.name }}</td>
+                                        <td>{{ topic.topic2company.name }}</td>
+                                        <td>{{ topic.problem_info }}</td>
+                                        <td>{{ topic.action }}</td>
+                                        <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                        <td>
+                                            {% if topic.topic2incharge %}
+                                                {{ topic.topic2incharge.first_name }}
+                                                {{ topic.topic2incharge.last_name }}
+                                            {% endif %}
+                                        </td>
+                                        {% if topic.category == "FU" %}
+                                            <td>Follow Up</td>
+                                        {% endif %}
+                                        {% if topic.category == "PJ" %}
+                                            <td>Project</td>
+                                        {% endif %}
+                                        {% if topic.category == "PL" %}
+                                            <td>Policy</td>
+                                        {% endif %}
+                                        {% if topic.category == "NT" %}
+                                            <td>Notes</td>
+                                        {% endif %}
+                                        {% if topic.status == "O" %}
+                                            <td>Open</td>
+                                        {% endif %}
+                                        {% if topic.status == "C" %}
+                                            <td>Closed</td>
+                                        {% endif %}
+                                        {% if topic.status == "P" %}
+                                            <td>Progress</td>
+                                        {% endif %}
+                                        {% if topic.status == "H" %}
+                                            <td>Hold</td>
+                                        {% endif %}
+                                        {% if topic.status != "C" %}
+                                            <td><a href="{% url 'pica:status_activity' topic.id 3 %}"
+                                                   class="btn btn-outline-primary"><i
+                                                    class="fa-solid fa-person-walking"></i></a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Company{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Update Company</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label fw-bold">Company Name :</label>
+                                <strong>{{ company.name }}</strong>
+                            </div>
+                            <br>
+                            <div class="col-3 mt-3">
+                                <label class="form-label">Company Code :</label>
+                                {% render_field form.short_code placeholder="Company Code" class+="form-control" %}
+                            </div>
+                            <div class="col-3 mt-3">
+                                <label class="form-label">Status :</label>
+                                {% render_field form.status_active placeholder="Status" class+="form-control" %}
+                            </div>
+                            <div class="col-3 mt-3">
+                                <label class="form-label">Company Type :</label>
+                                {% render_field form.company_type placeholder="Company Type" class+="form-control" %}
+                            </div>
+                        </div>
+                        <hr class="mt-5 mb-5">
+                        <div class="row mt-5 mb-3">
+                            <div class="col-6">
+                                <label class="form-label" for="">Logo Company :</label>
+                                {{ form.logo }}
+                            </div>
+                            <div class="col-6 text-center">
+                                {% if company.logo %}
+                                    <img class="border border-3 p-4" src="{{ company.logo.url }}" alt=""
+                                         style="width: 400px; height: 200px;">
+                                {% else %}
+                                    <img class="border border-3 p-4" src="{% static 'img/user.png' %}" alt=""
+                                         style="width: 400px; height: 200px;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3" href="{% url 'pica:list_company' %}"><i
+                                                class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

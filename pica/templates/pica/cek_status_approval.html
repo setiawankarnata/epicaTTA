@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Cek Status Approval{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center mt-5">
+            <div class="col-5">
+                <p class="fw-bold fs-5">Meeting Forum : {{ meeting.meeting2forum.forum_name }}</p>
+                <p>Date : {{ meeting.meeting_date|date:"d M Y" }}</p>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Start Time : {{ meeting.start_time| time:"G:i" }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p>End Time : {{ meeting.end_time| time:"G:i" }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p>Location : {{ meeting.location }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p>Notulen : {{ meeting.notulen }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 bg-secondary text-white mt-3">
+                <div class="text-center fs-4">
+                    Status Approval
+                </div>
+                <table class="table table-light mt-3">
+                    <thead>
+                    <tr>
+                        <th>Approver</th>
+                        <th>Status</th>
+                        <th>Date Approval</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for approver in approvers %}
+                        <tr>
+                            <td>{{ approver.bod_name }}</td>
+                            {% if approver.approved == "Y" %}
+                                <td>Approved</td>
+                                <td>{{ approver.date_approved|date:"l, d M Y P" }}</td>
+                            {% else %}
+                                {% if approver.present == "P" %}
+                                    <td>Not Approved</td>
+                                {% else %}
+                                    <td>Absent</td>
+                                {% endif %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+                <div class="text-center">
+                    <a href="{% url 'pica:status_approval' %}" class="btn btn-success mt-5"><i
+                            class="fa-solid fa-circle-arrow-left fa-lg"></i>&nbsp;Back
+                        to Status Incomplete BOD MoM Approval</a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

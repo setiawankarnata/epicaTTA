@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Input/Update Participants{% endblock %}
+{% block content %}
+    <style>
+        :root {
+            --bs-pagination-color: black;
+        }
+
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-6">
+                <a href="{% url 'pica:list_meeting' op %}" class="btn btn-danger mt-3"><i
+                        class="fa-solid fa-arrow-left fa-lg"></i>&nbsp;Back to List
+                    Meeting</a>
+                <form action="">
+                    <div class="fs-3 fw-bold text-center mt-2">
+                        <fieldset>
+                            <legend>Input/Update Participants</legend>
+                        </fieldset>
+                    </div>
+                    <div class="row text-center mt-2 mb-2">
+                        <div class="col-5 input-group">
+                            <input type="search" id="floatInput" class="form-control" name="q_all"
+                                   placeholder="Search name of participant">
+                            <label for="floatInput"></label>
+                            <button type="submit" class="btn btn-dark">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <div class="col-6 text-center">
+                <h5>Available Participants</h5>
+                <div class="scroll">
+                    <table class="table table-striped text-start" style="background-color: white">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for usr in available_user %}
+                            <tr>
+                                <td>{{ usr.first_name }}</td>
+                                <td>{{ usr.last_name }}</td>
+                                <td><a href="{% url 'pica:add_participant_to_meeting' meeting.id usr.id op %}"
+                                       class="btn btn-outline-warning"><i
+                                        class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-4">
+                <div class="text-center">
+                    <h5>Participants in Meeting</h5>
+                </div>
+                <table class="table border border-1 border-dark" style="background-color: white">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>Participant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user_meet in user_in_meeting %}
+                        <tr>
+                            <td>{{ user_meet.first_name }}&nbsp;{{ user_meet.last_name }}</td>
+                            <td>
+                                <a href="{% url 'pica:delete_participant_from_meeting' meeting.id user_meet.id op %}"
+                                   class="btn btn-outline-danger"><i
+                                        class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

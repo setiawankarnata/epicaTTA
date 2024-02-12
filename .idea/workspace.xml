@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="513a9935-c7c3-4908-9d4a-230294c6e61d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/epicaTTA.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/asgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/celery.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/storages.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/epicaTTA/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/tasks.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/activity_attachments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/approve_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/cek_status_approval.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/change_status_pica.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/close_pica.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/dashboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/delete_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/delete_company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/delete_forum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/delete_outside.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/edit_workflow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/email_notif.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/email_notif_bod.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/email_notif_bod_pdf.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/email_notif_pic_inputter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/images/logo_epica.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_attachments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_forum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_incharge.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_outside.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/input_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_activity_attachment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_approve_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_complete_approve.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_cpmd.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_finish_check.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_forum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_notes.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_outside.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_pending_approved.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_secretary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_topic_review.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_update_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/list_workflow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/mom.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/ongoing_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/overdue_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/review_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/search_incharge.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/search_participants.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/search_topics.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/status_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/status_approval.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_activity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_cpmd.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_forum.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_internal_participant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_outside.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_outside_participant.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_pic_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_secretary.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_topic.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/update_workflow.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/view_meeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/templates/pica/view_mom_complete_approve.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pica/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/pdf_css.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/adminepica.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/background_epica.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/background_epica_high.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/background_epica_new.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/epicaadmin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_abb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_abj.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_abp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_cipta.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_dn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_ds.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_epica_new.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_kcm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_pju.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_pmm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_smm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/logo_tta.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/user-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/user-3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/user-default.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/img/user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/csv_upload.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base/footer.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base/nav-main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base/show_message.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_change_done.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_change_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_complete.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_confirm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_done.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/password_reset_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/delete_department.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/input_bulk_user.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/input_department.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/list_department.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/update_department.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/templates/users/update_profile.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2bnLPSqibVmv28JE3MKFz7UgMGv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Django Server.epicaTTA.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="epicaTTA" type="Python.DjangoServer" factoryName="Django server">
+      <module name="epicaTTA" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="epicaTTA.settings" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-2887949eec09-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.13763.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="513a9935-c7c3-4908-9d4a-230294c6e61d" name="Changes" comment="" />
+      <created>1706845873250</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1706845873250</updated>
+      <workItem from="1706845887195" duration="1952000" />
+      <workItem from="1706848109726" duration="429000" />
+      <workItem from="1706908152323" duration="230000" />
+      <workItem from="1706931658632" duration="599000" />
+      <workItem from="1707094400728" duration="605000" />
+      <workItem from="1707095375380" duration="137000" />
+      <workItem from="1707095966972" duration="358000" />
+      <workItem from="1707105104151" duration="28000" />
+      <workItem from="1707105221845" duration="9348000" />
+      <workItem from="1707124472569" duration="106000" />
+      <workItem from="1707136940670" duration="635000" />
+      <workItem from="1707137624152" duration="27000" />
+      <workItem from="1707137669029" duration="164000" />
+      <workItem from="1707137867191" duration="1290000" />
+      <workItem from="1707181807943" duration="193000" />
+      <workItem from="1707182037984" duration="1557000" />
+      <workItem from="1707183930477" duration="780000" />
+      <workItem from="1707184954367" duration="4396000" />
+      <workItem from="1707192795795" duration="6178000" />
+      <workItem from="1707223131505" duration="315000" />
+      <workItem from="1707286080998" duration="115000" />
+      <workItem from="1707286390031" duration="2064000" />
+      <workItem from="1707314269915" duration="17000" />
+      <workItem from="1707619635574" duration="66000" />
+      <workItem from="1707636413252" duration="330000" />
+      <workItem from="1707685823124" duration="1209000" />
+      <workItem from="1707698862763" duration="907000" />
+      <workItem from="1707742822064" duration="291000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

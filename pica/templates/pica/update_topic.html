@@ -1,0 +1,89 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Topic{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 bg-light mt-2 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-2 mt-2">Update Topic</legend>
+                        <div>
+                            <h6>Forum : {{ meeting.meeting2forum.forum_name }}</h6>
+                            <h6>Date : {{ meeting.meeting_date|date:"l, d M Y" }}</h6>
+                        </div>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-12 mt-2">
+                                <label class="form-label">Topic Name :</label>
+                                {% render_field form.topic_name placeholder="Topic Name" class+="form-control" %}
+                            </div>
+                            <br>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Division :</label>
+                                {% render_field form.topic2department class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Problem Owner :</label>
+                                {% render_field form.topic2company class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Due Date :</label>
+                                {% render_field form.due_date placeholder="Due Date" class+="form-control" type="date" %}
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Category :</label>
+                                {% render_field form.category placeholder="Category" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Status :</label>
+                                {% render_field form.status placeholder="Status" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-2">
+                                <label class="form-label">Reference No :</label>
+                                {% render_field form.to_ref_no class+="form-control" %}
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label class="form-label">Problem :</label>
+                                {% render_field form.problem_info placeholder="Problem" class+="form-control" %}
+                            </div>
+                            <div class="col-6 mt-2">
+                                <label class="form-label">Action :</label>
+                                {% render_field form.action placeholder="Action" class+="form-control" %}
+                            </div>
+                            <div class="col-12 mt-2">
+                                <div>
+                                    <h6>PIC (inputter)
+                                        : {{ topic.topic2user.first_name }} {{ topic.topic2user.last_name }}</h6>
+                                    <h6>PIC (PICA)
+                                        : {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}</h6>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <a href="{% url 'pica:search_incharge' meeting.id op topic.id %}"
+                                   class="btn btn-warning"><i class="fa-solid fa-person"></i>&nbsp;&nbsp;Update PIC</a>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3" href="{% url 'pica:list_topic' meeting.id op %}"><i
+                                                class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

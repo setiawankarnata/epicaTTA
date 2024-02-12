@@ -1,0 +1,30 @@
+{% for message in messages %}
+    {% if message.tags == 'success' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Success", m, "success");
+        </script>
+    {% endif %}
+    {% if message.tags == 'error' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Error", m, "error");
+        </script>
+    {% endif %}
+    {% if message.tags == 'warning' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Warning", m, "warning");
+        </script>
+    {% endif %}
+    {% if message.tags == 'info' %}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            var m = "{{ message }}";
+            swal("Warning", m, "info");
+        </script>
+    {% endif %}
+{% endfor %}

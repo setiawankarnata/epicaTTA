@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center mt-2">
+                <h4 class="alert bg-light text-dark">
+                    Welcome,
+                    <strong>{{ request.user.first_name }}&nbsp;{{ request.user.last_name }}&nbsp;&nbsp;</strong></h4>
+            </div>
+            <div class="col-md-12 text-center mt-5">
+                <h3>Your Dashboard</h3>
+            </div>
+            {% if total_approval == 0 and total_topics == 0 %}
+                <br>
+                <div class="text-center fs-3 mt-5">
+                    You have no tasks/approval at this moment.
+                </div>
+            {% endif %}
+            {% if total_topics %}
+                <div class="col-md-3">
+                    <div class="card mb-3 mt-5">
+                        <div class="card-header fs-4 text-center">
+                            Tasks Update
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">You have {{ total_topics }} outstanding tasks.</h5>
+                            <p class="card-text">Please update the progress.</p>
+                            <a href="{% url 'pica:list_activity' %}" class="btn btn-primary"><i
+                                    class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Activity</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if total_approval %}
+                <div class="col-md-3">
+                    <div class="card mb-3 mt-5">
+                        <div class="card-header fs-4 text-center">
+                            MoM Approval
+                        </div>
+                        <div class="card-body  text-center">
+                            <h5 class="card-title">You have {{ total_approval }} outstanding approvals.</h5>
+                            <p class="card-text">Please approve soon.</p>
+                            <a href="{% url 'pica:list_meeting_pending' %}" class="btn btn-primary"><i
+                                    class="fa-solid fa-thumbs-up"></i>&nbsp;&nbsp;Approve</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

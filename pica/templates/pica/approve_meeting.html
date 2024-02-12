@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Approve Meeting{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5 bg-light mt-5 mb-5">
+                <form action="" method="post" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-3 fw-bold mb-5 mt-5 text-success">Approve Minutes of
+                            Meeting
+                        </legend>
+                        {% csrf_token %}
+                        <br>
+                        <div class="text-center fs-5">
+                            Are you sure want to approve this meeting?
+                        </div>
+                        <br>
+                        <div class="row mb-3">
+                            <div class="col-12 fs-5">
+                                Forum Name : <strong>{{ meeting.meeting2forum.forum_name }}</strong>
+                            </div>
+                            <div class="col-12 fs-5">
+                                Meeting Date : <strong>{{ meeting.meeting_date|date:"l, d M Y" }}</strong>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-success mx-3"
+                                                type="submit"><i class="fa-regular fa-thumbs-up"></i>&nbsp;Approve
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_meeting_pending' %}"><i
+                                                class="fa-solid fa-xmark"></i>&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5 bg-secondary text-white mt-5">
+                <div class="text-center fs-4">
+                    Status Approval
+                </div>
+                <table class="table table-light mt-3">
+                    <thead>
+                    <tr>
+                        <th>Approver</th>
+                        <th>Status</th>
+                        <th>Date Approval</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for approval in approvals %}
+                        <tr>
+                            <td>{{ approval.bod_name }}</td>
+                            {% if approval.approved == "Y" %}
+                                <td>Approved</td>
+                                <td>{{ approval.date_approved|date:"l, d M Y P" }}</td>
+                            {% else %}
+                                {% if approval.present == "P" %}
+                                    <td>Not Approved</td>
+                                {% else %}
+                                    <td>Absent</td>
+                                {% endif %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

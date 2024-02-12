@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Notification Close PICA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .information {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+
+        table,
+        th,
+        td {
+            padding: 5px;
+            border: 1px solid #000;
+            font-size: 16px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+<main class="container">
+    <article class="information">
+        <p>Dear Tim CPMD,</p>
+        <br><br>
+        <p>ePica Systems informed you that {{ closed_by }} has closed the following PICA today {{ today|date:"d M Y" }}:
+        </p>
+    </article>
+    <table>
+        <thead>
+        <tr>
+            <th>Topic</th>
+            <th>Problem Identification</th>
+            <th>Corrective Action</th>
+            <th>Due Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ topic_name }}</td>
+            <td>{{ problem }}
+            </td>
+            <td>{{ action }}</td>
+            <td>{{ due_date|date:"d M Y" }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <br><br>
+    <h2>Activities</h2>
+    <br>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Action</th>
+            <th>Updated By</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.activity_date|date:"d M Y" }}</td>
+                <td>{{ activity.action_description }}</td>
+                <td>{{ pic.first_name }} {{ pic.last_name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% block title %}View MoM Complete Approve{% endblock %}
+{% block content %}
+    <main class="container">
+        <header class="mt-5 text-center">
+            <h3>View MoM Complete Approve</h3>
+        </header>
+        <table class="table table-secondary table-bordered mt-5">
+            <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Problem Identification</th>
+                <th>Corrective Action</th>
+                <th>PIC PICA</th>
+                <th>Due Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.topic_name }}</td>
+                    <td>{{ topic.problem_info }}
+                    </td>
+                    <td>{{ topic.action }}</td>
+                    <td>
+                        {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}
+                    </td>
+                    <td>{{ topic.due_date|date:"d M Y" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center mt-3">
+            <a class="btn btn-primary" href="{% url 'pica:list_complete_approve' %}"><i
+                    class="fa-solid fa-arrow-left fa-lg"></i>&nbsp;&nbsp;Back
+                to previous page</a>
+        </div>
+    </main>
+{% endblock content %}

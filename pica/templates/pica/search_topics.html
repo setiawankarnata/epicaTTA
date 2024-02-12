@@ -1,0 +1,244 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Search PICA{% endblock %}
+{% block content %}
+    <style>
+        :root {
+            --bs-pagination-color: black;
+        }
+
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container">
+        <form action="">
+            <div class="fs-3 fw-bold text-center mt-2">
+                <fieldset>
+                    <legend>Search PICA</legend>
+                </fieldset>
+            </div>
+            <div class="row text-center mt-2 mb-2">
+                <div class="col-5 input-group">
+                    <input type="search" id="floatInput" class="form-control" name="q_all" value="{{ q_all }}"
+                           placeholder="Search topic,problem identification, corrective action">
+                    <label for="floatInput"></label>
+                    <button type="submit" class="btn btn-dark">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row g-1">
+                <div class="form-group col-2 fw-bold">
+                    <label for="forum_name">Forum Name : </label>
+                    <select id="forum_name" class="form-control" name="forum_id">
+                        <option selected>Choose...</option>
+                        {% for forum in forums %}
+                            {% if obj_forum ==  forum %}
+                                <option selected value={{ forum.id }}>{{ forum.forum_name }}</option>
+                            {% else %}
+                                <option value={{ forum.id }}>{{ forum.forum_name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-2 fw-bold">
+                    <label for="category">Category : </label>
+                    <select id="category" class="form-control" name="category">
+                        <option selected>Choose...</option>
+                        {% for cat in categories %}
+                            {% if cat.0 == category %}
+                                <option selected value="{{ cat.0 }}">{{ cat.1 }}</option>
+                            {% else %}
+                                <option value="{{ cat.0 }}">{{ cat.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-2 fw-bold">
+                    <label for="status">Status : </label>
+                    <select id="status" class="form-control" name="status">
+                        <option selected>Choose...</option>
+                        {% for st in statuss %}
+                            {% if st.0 == status %}
+                                <option selected value="{{ st.0 }}">{{ st.1 }}</option>
+                            {% else %}
+                                <option value="{{ st.0 }}">{{ st.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-2 fw-bold">
+                    <label for="department">Division : </label>
+                    <select id="department" class="form-control" name="department_id">
+                        <option selected>Choose...</option>
+                        {% for department in departments %}
+                            {% if obj_department ==  department %}
+                                <option selected value={{ department.id }}>{{ department.name }}</option>
+                            {% else %}
+                                <option value={{ department.id }}>{{ department.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-2 fw-bold">
+                    <label for="company">Company : </label>
+                    <select id="company" class="form-control" name="company_id">
+                        <option selected>Choose...</option>
+                        {% for company in companies %}
+                            {% if obj_company ==  company %}
+                                <option selected value={{ company.id }}>{{ company.name }}</option>
+                            {% else %}
+                                <option value={{ company.id }}>{{ company.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-2 g-1">
+                <div class="col-3 fw-bold">
+                    <label for="bulan">Month : </label>
+                    <select id="bulan" class="form-control" name="bulan">
+                        <option selected>Choose...</option>
+                        {% for bln in bulans %}
+                            {% if bln.0 == bulan %}
+                                <option selected value={{ bln.0 }}>{{ bln.1 }}</option>
+                            {% else %}
+                                <option value={{ bln.0 }}>{{ bln.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-3 fw-bold">
+                    <label for="tahun">Year : </label>
+                    <input type="number" min=2020 class="form-control"
+                           id="tahun"
+                           value="{{ tahun }}"
+                           name="tahun">
+                </div>
+                <div class="col-3 fw-bold">
+                    <label for="tahun">PIC Inputter : </label>
+                    <input type="text" class="form-control"
+                           id="pic_inputter"
+                           value="{{ pic_inputter }}"
+                           name="pic_inputter">
+                </div>
+                <div class="col-3 fw-bold">
+                    <label for="tahun">PIC PICA: </label>
+                    <input type="text" class="form-control"
+                           id="pic_pica"
+                           value="{{ pic_pica }}"
+                           name="pic_pica">
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="scroll">
+        <table class="table table-striped">
+            <thead style="background-color: goldenrod">
+            <tr>
+                <th>Forum Name</th>
+                <th>Meeting Date</th>
+                <th>Topic</th>
+                <th>Divisi</th>
+                <th>Company</th>
+                <th>Problem Identification</th>
+                <th>Corrective Action</th>
+                <th>Due Date</th>
+                <th>PIC Inputter</th>
+                <th>PIC PICA</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Ref#</th>
+                <th>Action</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.topic2meeting.meeting2forum.forum_name }}</td>
+                    <td>{{ topic.topic2meeting.meeting_date|date:"d M Y" }}</td>
+                    <td>{{ topic.topic_name }}</td>
+                    <td>{{ topic.topic2department.name }}</td>
+                    <td>{{ topic.topic2company.name }}</td>
+                    <td>{{ topic.problem_info }}</td>
+                    <td>{{ topic.action }}</td>
+                    <td>{{ topic.due_date|date:"d M Y" }}</td>
+                    <td>
+                        {{ topic.topic2user.first_name }} {{ topic.topic2user.last_name }}
+                    </td>
+                    <td>
+                        {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}
+                    </td>
+                    {% if topic.category == "FU" %}
+                        <td>Follow Up</td>
+                    {% endif %}
+                    {% if topic.category == "PJ" %}
+                        <td>Project</td>
+                    {% endif %}
+                    {% if topic.category == "PL" %}
+                        <td>Policy</td>
+                    {% endif %}
+                    {% if topic.category == "NT" %}
+                        <td>Notes</td>
+                    {% endif %}
+                    {% if topic.status == "O" %}
+                        <td>Open</td>
+                    {% endif %}
+                    {% if topic.status == "C" %}
+                        <td>Closed</td>
+                    {% endif %}
+                    {% if topic.status == "P" %}
+                        <td>Progress</td>
+                    {% endif %}
+                    {% if topic.status == "H" %}
+                        <td>Hold</td>
+                    {% endif %}
+                    <td>{{ topic.to_ref_no }}</td>
+                    {#                <td><a href="{% url 'pica:create_pdf' topic.id %}"#}
+                    {#                       class="btn btn-outline-danger"><i class="fa-solid fa-file-pdf fa-xl"></i></a></td>#}
+                    {% if topic.status == "C" %}
+                        <td><a href="{% url 'pica:change_pica_status' topic.id %}"
+                               class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                               title="Change status to Progress"><i class="fa-solid fa-rotate fa-lg"></i></a></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    <td><a href="{% url 'pica:status_activity' topic.id 1 %}"
+                           class="btn btn-outline-primary btn-lg" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                           title="See Activity"><i class="fa-solid fa-person-walking"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br>
+    {#    <nav>#}
+    {#        <ul class="pagination justify-content-center">#}
+    {#            {% if topics.has_previous %}#}
+    {#                <li class="page-item"><a href="?page={{ topics.previous_page_number }}"#}
+    {#                                         class="page-link">Previous</a>#}
+    {#                </li>#}
+    {#            {% endif %}#}
+    {#            {% for item in page_range %}#}
+    {#                {% if item == topics.number %}#}
+    {#                    <li class="page-item active"><a href="?page={{ item }}"#}
+    {#                                                    class="page-link">{{ item }}</a>#}
+    {#                    </li>#}
+    {#                {% else %}#}
+    {#                    <li class="page-item"><a href="?page={{ item }}" class="page-link">{{ item }}</a></li>#}
+    {#                {% endif %}#}
+    {#            {% endfor %}#}
+    {#            {% if topics.has_next %}#}
+    {#                <li class="page-item"><a href="?page={{ topics.next_page_number }}"#}
+    {#                                         class="page-link">Next</a>#}
+    {#                </li>#}
+    {#            {% endif %}#}
+    {#        </ul>#}
+    {#    </nav>#}
+{% endblock %}
+

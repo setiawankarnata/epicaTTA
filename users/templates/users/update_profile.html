@@ -1,0 +1,84 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Edit your account{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-7 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Update Profile</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-5 mb-4">
+                                <label class="form-label fs-5 fw-bold mb-3">Username
+                                    : {{ user_profile.profile2user.username }}</label>
+                            </div>
+                            <div class="col-7 mb-4">
+                                <label class="form-label fs-5 fw-bold mb-3">Full Name
+                                    : {{ user_profile.profile2user.first_name }} {{ user_profile.profile2user.last_name }}</label>
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Gender :</label>
+                                {{ profile_form.gender }}
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Mobile :</label>
+                                {{ profile_form.mobile }}
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label">Status Karyawan :</label>
+                                {{ profile_form.bod }}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Division :</label>
+                                {{ profile_form.profile2department }}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Email Atasan :</label>
+                                {{ profile_form.email_atasan }}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Team CPMD :</label>
+                                {{ profile_form.cpmd }}
+                            </div>
+                        </div>
+                        <hr class="mt-5 mb-5">
+                        <div class="row mt-5 mb-3">
+                            <div class="col-6">
+                                <label class="form-label" for="">Photo Profile :</label>
+                                {{ profile_form.photo }}
+                            </div>
+                            <div class="col-6 text-center">
+                                {% if user_profile.photo.url %}
+                                    <img class="border border-3 p-4" src="{{ user_profile.photo.url }}" alt=""
+                                         style="width: 200px; height: 200px;">
+                                {% else %}
+                                    <img class="border border-3 p-4" src="{% static 'img/user.png' %}" alt=""
+                                         style="width: 200px; height: 200px;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                            Changes
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3" href="{% url 'pica:dashboard' %}"><i
+                                                class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

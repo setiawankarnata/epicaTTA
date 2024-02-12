@@ -1,0 +1,58 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Outside Participants{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-7 bg-light mt-3 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-3">List Outside Participants</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:input_outside' %}" class="btn btn-warning"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add Participant</a>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <div class="scroll">
+                    <table class="table table-light">
+                        <thead>
+                        <tr>
+                            <th>Participant Name</th>
+                            <th>Email</th>
+                            <th>Company</th>
+                            <th>Mobile</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for outside in outsides %}
+                            <tr>
+                                <td>{{ outside.fullname }}</td>
+                                <td>{{ outside.email }}</td>
+                                <td>{{ outside.company_from }}</td>
+                                <td>{{ outside.mobile }}</td>
+                                <td><a href="{% url 'pica:update_outside' outside.id %}" class="btn btn-outline-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-danger' href="{% url 'pica:delete_outside' outside.id %}"><i
+                                            class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

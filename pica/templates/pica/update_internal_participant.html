@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Internal Participant{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-5 mb-5">
+                <h3>Update Internal Participant</h3>
+            </div>
+            <div class="col-12">
+                <div>
+                    <a href="{% url 'pica:list_meeting' op %}" class="btn btn-success"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back to List Meeting</a>
+                </div>
+            </div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>Participants Available</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>Participant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in all_users %}
+                        {% if user not in user_in_meeting and user.is_superuser == False %}
+                            <tr>
+                                <td>{{ user.first_name }}&nbsp;{{ user.last_name }}</td>
+                                <td>
+                                    <a href="{% url 'pica:add_participant_to_meeting' meeting.id user.id op %}"
+                                       class="btn btn-success"><i
+                                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1 mt-5"></div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>Participants in Meeting</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>Participant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user_meet in user_in_meeting %}
+                        <tr>
+                            <td>{{ user_meet.first_name }}&nbsp;{{ user_meet.last_name }}</td>
+                            <td>
+                                <a href="{% url 'pica:delete_participant_from_meeting' meeting.id user_meet.id op %}"
+                                   class="btn btn-danger"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

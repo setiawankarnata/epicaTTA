@@ -1,0 +1,79 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Topics Assigned to you{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-5 mt-5">List Topics Assigned to you</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Meeting Forum</th>
+                        <th>Meeting Date</th>
+                        <th>Topic Name</th>
+                        <th>Problem Identification</th>
+                        <th>Corrective Action</th>
+                        <th>Due Date</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in topics %}
+                        <tr>
+                            <td>{{ topic.topic2meeting.meeting2forum.forum_name }}</td>
+                            <td>{{ topic.topic2meeting.meeting_date|date:"l, d M Y" }}</td>
+                            <td>{{ topic.topic_name }}</td>
+                            <td>{{ topic.problem_info }}</td>
+                            <td>{{ topic.action }}</td>
+                            <td>{{ topic.due_date|date:"l, d M Y" }}</td>
+                            {% if topic.category == "FU" %}
+                                <td>Follow Up</td>
+                            {% endif %}
+                            {% if topic.category == "PJ" %}
+                                <td>Project</td>
+                            {% endif %}
+                            {% if topic.category == "PL" %}
+                                <td>Policy</td>
+                            {% endif %}
+                            {% if topic.category == "NT" %}
+                                <td>Notes</td>
+                            {% endif %}
+                            {% if topic.status == "O" %}
+                                <td>Open</td>
+                            {% endif %}
+                            {% if topic.status == "P" %}
+                                <td>Progress</td>
+                            {% endif %}
+                            {% if topic.status == "H" %}
+                                <td>Hold</td>
+                            {% endif %}
+                            {% if topic.status != "H" %}
+                                <td><a href="{% url 'pica:list_update_activity' topic.id %}" class="btn btn-primary"><i
+                                        class="fa-solid fa-pen-to-square fa-xl"></i>&nbsp;&nbsp;Update
+                                    Activity</a>
+                                </td>
+                                <td><a href="{% url 'pica:close_pica' topic.id %}" class="btn btn-success"><i
+                                        class="fa-solid fa-flag-checkered fa-xl"></i>&nbsp;&nbsp;Close
+                                    PICA&nbsp;</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

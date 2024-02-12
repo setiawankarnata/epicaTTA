@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Update Activity{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-5">List Update Activity</div>
+                <br>
+                <div class="row mb-3 fs-6">
+                    <div class="col-4">
+                        Topic Name : <strong>{{ topic.topic_name }}</strong>
+                    </div>
+                    <div class="col-4">
+                        Due Date : <strong>{{ topic.due_date }}</strong>
+                    </div>
+                    <div class="col-4">
+                        {% if topic.status == "O" %}
+                            Status : <strong>Open</strong>
+                        {% endif %}
+                        {% if topic.status == "P" %}
+                            Status : <strong>Progress</strong>
+                        {% endif %}
+                        {% if topic.status == "H" %}
+                            Status : <strong>Hold</strong>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        Problem Info : <strong>{{ topic.problem_info }}</strong>
+                    </div>
+                    <div class="col-12">
+                        Action : <strong>{{ topic.action }}</strong>
+                    </div>
+                </div>
+                <div>
+                    <a href="{% url 'pica:input_activity' topic.id %}" class="btn btn-primary"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add Detail Activity</a>
+                    <a href="{% url 'pica:list_activity' %}" class="btn btn-success"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back to List Activity</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Updated by</th>
+                        <th>Action/Description</th>
+                        <th>Attachment</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for activity in activities %}
+                        <tr>
+                            <td>{{ activity.activity_date|date:"l, d M Y" }}</td>
+                            <td>{{ activity.activity2user.first_name }}&nbsp;{{ activity.activity2user.last_name }}</td>
+                            <td>{{ activity.action_description }}</td>
+                            <td><a href="{% url 'pica:input_activity_attachment' meeting.id activity.id %}"
+                                   class="btn btn-primary"><i class="fa-solid fa-paperclip fa-lg"></i>&nbsp;Add</a></td>
+                            <td><a href="{% url 'pica:update_activity' activity.id %}"
+                                   class="btn btn-warning">Update</a>
+                            <td><a href="{% url 'pica:delete_activity' activity.id %}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

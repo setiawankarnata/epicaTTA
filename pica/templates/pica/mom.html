@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Minutes of Meeting</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .logo {
+            text-align: right;
+        }
+
+        .logo-abb {
+            width: 150px;
+            height: 50px;
+        }
+
+        .logo-top {
+            width: 150px;
+            height: 50px;
+        }
+
+        .logo-abj {
+            width: 150px;
+            height: 50px;
+        }
+
+        .logo-abp {
+            width: 150px;
+            height: 50px;
+        }
+
+        .logo-kcm {
+            width: 100px;
+            height: 100px;
+        }
+
+        .logo-pmm {
+            width: 100px;
+            height: 50px;
+        }
+
+        .logo-smm {
+            width: 150px;
+            height: 50px;
+        }
+
+        #judul {
+            font-size: 20px;
+        }
+
+        .table-header {
+            font-size: 14px;
+        }
+
+        .all_participant {
+            font-size: 14px;
+        }
+
+        .detail-mom {
+            font-size: 14px;
+        }
+
+        .foot-note {
+            font-size: 14px;
+        }
+
+        .detail-mom th {
+            background-color: #e6aa00;
+            color: black;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 1cm 1cm 1cm 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Start: Header -->
+<section>
+    {% if forum_name == "BOD ABB" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-abb" src=" {% static '/img/logo_abb.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD TOP" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-top" src=" {% static '/img/logo_top.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD ABJ" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-abj" src=" {% static '/img/logo_abj.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD ABP" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-abp" src=" {% static '/img/logo_abp.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD KCM" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-kcm" src=" {% static '/img/logo_kcm.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD PMM" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-pmm" src=" {% static '/img/logo_pmm.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+    {% if forum_name == "BOD SMM" %}
+        <div class="row logo">
+            <div class="col">
+                <img class="logo-smm" src=" {% static '/img/logo_smm.png' %}">
+                <span><p class="text-center fw-bold" id="judul">Minutes of Meeting {{ forum_name }}</p></span>
+            </div>
+        </div>
+    {% endif %}
+</section><!-- End: Header -->
+<!-- Start: Meeting & Participant -->
+<section>
+    <div>
+        <div class="container">
+            <div class="row mt-2 box-header">
+                <div class="col-4 mt-3 event-header">
+                    <div class="mb-2">
+                        <table class="table table-bordered table-header">
+                            <tbody class="header-mom">
+                            <tr>
+                                <td class="title-mom fw-bold">Forum</td>
+                                <td>{{ forum_name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-mom fw-bold">Date</td>
+                                <td>{{ meeting.meeting_date|date:"l, d F Y" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-mom fw-bold">Time</td>
+                                <td>{{ meeting.start_time|time:"G:i A" }} to {{ meeting.end_time|time:"G:i A" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-mom fw-bold">Notulen</td>
+                                <td>{{ meeting.notulen }}</td>
+                            </tr>
+                            <tr>
+                                <td class="title-mom fw-bold">Location</td>
+                                <td>{{ meeting.location }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-1"></div>
+                <div class="col-7 mt-3 header-mom all_participant">
+                    <h6 class="fw-bold">Participants</h6>
+                    {% if participants %}
+                        {% for participant in participants %}
+                            {{ participant.first_name }} {{ participant.last_name }},&nbsp;
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End: Meeting & Participant -->
+<section>
+    <div>
+        <div class="container">
+            <div class="table-responsive mt-2">
+                <table class="table table-striped detail-mom table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Issue Date</th>
+                        <th>Div/Dept.</th>
+                        <th>Company</th>
+                        <th>Topic</th>
+                        <th>Problem Identification</th>
+                        <th>Corrective Action</th>
+                        <th>Due Date</th>
+                        <th>PIC</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if topics %}
+                        {% for topic in topics %}
+                            <tr>
+                                <td>{{ meeting.meeting_date|date:"l, d F Y" }}</td>
+                                <td>{{ topic.topic2department.name }}</td>
+                                <td>{{ topic.topic2company.name }}</td>
+                                <td>{{ topic.topic_name }}</td>
+                                <td>{{ topic.problem_info }}</td>
+                                <td>{{ topic.action }}</td>
+                                <td>{{ topic.due_date|date:"d M Y" }}</td>
+                                <td>
+                                    {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <br><br>
+            <p class="foot-note"><em>This document has been digitally approved using the ePICA application.</em></p>
+            <p class="foot-note">
+                {% for bod in current_workflow %}
+                    {{ bod.bod_name }} ({{ bod.position }}), &nbsp;&nbsp;
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

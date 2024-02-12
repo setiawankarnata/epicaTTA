@@ -1,0 +1,76 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Company{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 mt-3 bg-light px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-3 list-company">List Company</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:input_company' %}" class="btn btn-warning"><i
+                            class="fa-solid fa-square-plus"></i>&nbsp;&nbsp;Add Company</a>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <div class="scroll">
+                    <table class="table table-light mt-5">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Company Code</th>
+                            <th>Company Type</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for company in companies %}
+                            <tr>
+                                <td>{{ company.name }}</td>
+                                <td>{{ company.short_code }}</td>
+                                {% if company.company_type == "OW" %}
+                                    <td>Mining Owner</td>
+                                {% endif %}
+                                {% if company.company_type == "HC" %}
+                                    <td>Holding Company</td>
+                                {% endif %}
+                                {% if company.company_type == "TR" %}
+                                    <td>Coal Trading</td>
+                                {% endif %}
+                                {% if company.company_type == "CR" %}
+                                    <td>Mining Contractor</td>
+                                {% endif %}
+                                {% if company.company_type == "OT" %}
+                                    <td>Others</td>
+                                {% endif %}
+                                {% if company.status_active %}
+                                    <td>Active</td>
+                                {% else %}
+                                    <td>Suspend</td>
+                                {% endif %}
+                                <td><a href="{% url 'pica:update_company' company.id %}" class="btn btn-outline-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-danger' href="{% url 'pica:delete_company' company.id %}"><i
+                                            class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

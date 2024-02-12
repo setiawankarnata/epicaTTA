@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Delete Division{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post">
+                    <fieldset>
+                        <legend class="text-center fs-3 fw-bold mb-5 mt-5 text-danger">Delete Division</legend>
+                        {% csrf_token %}
+                        <br>
+                        <div class="text-center fs-5">
+                            Are you sure want to delete this data?
+                        </div>
+                        <br>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                Division Name : {{ department.name }}
+                            </div>
+                            <div class="col-12">
+                                Description : {{ department.description }}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'users:list_department' %}"><i class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

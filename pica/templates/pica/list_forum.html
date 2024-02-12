@@ -1,0 +1,70 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Forum{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 bg-light mt-3 px-5">
+                <div class="text-center fs-4 fw-bold mb-3 mt-3">List Forum</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:input_forum' %}" class="btn btn-warning"><i
+                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add Forum</a>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-danger"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <div class="scroll">
+                    <table class="table">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Forum Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for forum in forums %}
+                            <tr>
+                                <td>{{ forum.forum_name }}</td>
+                                <td>{{ forum.description }}</td>
+                                <td><a href="{% url 'pica:update_forum' forum.id %}" class="btn btn-outline-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i>&nbsp;&nbsp;Update</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-danger' href="{% url 'pica:delete_forum' forum.id %}"><i
+                                            class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-secondary' href="{% url 'pica:list_workflow' forum.id %}"><i
+                                            class="fa-solid fa-arrows-spin"></i>&nbsp;&nbsp;Workflow</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-success' href="{% url 'pica:list_cpmd' forum.id %}"><i
+                                            class="fa-solid fa-user-plus fa-sm"></i>&nbsp;&nbsp;CPMD</a>
+                                </td>
+                                <td>
+                                    <a class='btn btn-outline-primary' href="{% url 'pica:list_secretary' forum.id %}"><i
+                                            class="fa-solid fa-user-plus fa-sm"></i>&nbsp;&nbsp;Secretary</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

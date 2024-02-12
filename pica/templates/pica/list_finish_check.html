@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Meeting (Finish Check){% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-5 mt-5">List Meeting (Finish Check)</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;
+                        Back to Dashboard</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Forum Name</th>
+                        <th>Meeting Date</th>
+                        <th>Starting Time</th>
+                        <th>End Time</th>
+                        <th>Notulen</th>
+                        <th>Location</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for meeting in meetings %}
+                        <tr>
+                            <td>{{ meeting.meeting2forum.forum_name }}</td>
+                            <td>{{ meeting.meeting_date|date:"l, d M Y" }}</td>
+                            <td>{{ meeting.start_time| time:"G:i" }}</td>
+                            <td>{{ meeting.end_time | time:"G:i" }}</td>
+                            <td>{{ meeting.notulen }}</td>
+                            <td>{{ meeting.location }}</td>
+                            <td><a href="{% url 'pica:list_approve_meeting' meeting.id %}"
+                                   class="btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Cek
+                                Status
+                                Approval</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

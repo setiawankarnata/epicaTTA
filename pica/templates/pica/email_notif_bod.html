@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Email Notification BOD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 1cm 1cm 1cm 1cm;
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+
+        .container {
+            width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .notification {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .information {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0px;
+        }
+
+        table,
+        th,
+        td {
+            padding: 5px;
+            border: 1px solid #000;
+            font-size: 14px;
+        }
+
+        .button {
+            text-align: center;
+        }
+
+        button {
+            font-size: 12px;
+            padding: 10px;
+            margin-top: 30px;
+        }
+
+        .link_epica {
+            text-decoration: none;
+            color: #000;
+            font-size: larger;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .detail-mom th {
+            background-color: #e6aa00;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+<main class="container">
+    <header>
+        <div class="logo">
+            <h3 class="notification">Notifications from ePica System</h3>
+        </div>
+    </header>
+    <article class="information">
+        {% if bod %}
+            <p>Dear Mr. {{ bod_name }},</p>
+            <p>ePica System informed you that based on Minutes of Meeting {{ meeting.meeting2forum.forum_name }} which
+                held
+                on {{ meeting.meeting_date|date:"l, d M Y" }}, you have to approve the following PICA.
+                Details are shown below:
+            </p>
+        {% else %}
+            <p>ePica System informed you that based on Minutes of Meeting {{ meeting.meeting2forum.forum_name }} which
+                held
+                on {{ meeting.meeting_date|date:"l, d M Y" }}, currently waiting for <strong>({{ bod_name }})</strong>
+                approval. Details are shown below:
+            </p>
+        {% endif %}
+    </article>
+    <table class="table table-striped detail-mom table-bordered">
+        <thead>
+        <tr>
+            <th>Issue Date</th>
+            <th>Division</th>
+            <th>Company</th>
+            <th>Topic</th>
+            <th>Problem Identification</th>
+            <th>Corrective Action</th>
+            <th>Due Date</th>
+            <th>PIC</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for topic in topics %}
+            <tr>
+                <td>{{ meeting.meeting_date|date:"d M Y" }}</td>
+                <td>{{ topic.topic2department.name }}</td>
+                <td>{{ topic.topic2company.name }}</td>
+                <td>{{ topic.topic_name }}</td>
+                <td>{{ topic.problem_info }}</td>
+                <td>{{ topic.action }}</td>
+                <td>{{ topic.due_date|date:"d M Y" }}</td>
+                <td>
+                    {{ topic.topic2incharge.first_name }} {{ topic.topic2incharge.last_name }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if bod %}
+        <div class="button">
+            <button><a class="link_epica" href="{{ link }}"><i
+                    class="fa-solid fa-thumbs-up fa-xl"></i><strong>&nbsp;&nbsp;APPROVE</strong></a>
+            </button>
+            <button><a class="link_epica" href="{{ link_epica }}"><i
+                    class="fa-solid fa-thumbs-up fa-xl"></i><strong>&nbsp;&nbsp;Login to ePica</strong></a>
+            </button>
+        </div>
+        <br><br>
+        <p><strong>Note:</strong></p>
+        <p>If you need to revise this Minutes of Meeting, please submit your note by replying this email to :</p>
+        {% if pic_cpmd %}
+            <p>CPMD :
+                {% for pic in pic_cpmd %}
+                    {{ pic.first_name }} {{ pic.last_name }} ({{ pic.email }})
+                {% endfor %}
+            </p>
+        {% endif %}
+        {% if pic_secretary %}
+            <p>Secretary :
+                {% for pic in pic_secretary %}
+                    {{ pic.first_name }} {{ pic.last_name }} ({{ pic.email }})
+                {% endfor %}
+            </p>
+        {% endif %}
+        <br><br>
+    {% endif %}
+</main>
+</body>
+
+</html>

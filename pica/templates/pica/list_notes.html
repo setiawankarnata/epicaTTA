@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Notes Assigned to you{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-5 mt-5">List Notes Assigned to you</div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Meeting Forum</th>
+                        <th>Meeting Date</th>
+                        <th>Topic Name</th>
+                        <th>Problem</th>
+                        <th>Action</th>
+                        <th>Due Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in topics %}
+                        <tr>
+                            <td>{{ topic.topic2meeting.meeting2forum.forum_name }}</td>
+                            <td>{{ topic.topic2meeting.meeting_date|date:"l, d M Y" }}</td>
+                            <td>{{ topic.topic_name }}</td>
+                            <td>{{ topic.problem_info }}</td>
+                            <td>{{ topic.action }}</td>
+                            <td>{{ topic.due_date|date:"l, d M Y" }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

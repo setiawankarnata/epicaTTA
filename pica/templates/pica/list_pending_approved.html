@@ -1,0 +1,53 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}List Meeting (pending approved){% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 bg-light mt-5 px-5">
+                <div class="text-center fs-4 fw-bold mb-5 mt-5">List Meeting (pending approved)</div>
+                <br>
+                <div class="fs-5">
+                    BOD Name : <strong>{{ user.first_name }}&nbsp;{{ user.last_name }}</strong>
+                </div>
+                <br>
+                <div>
+                    <a href="{% url 'pica:dashboard' %}" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back
+                        to Dashboard</a>
+                </div>
+                <br>
+                <table class="table table-light">
+                    <thead>
+                    <tr>
+                        <th>Forum Name</th>
+                        <th>Meeting Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for approval in approvals %}
+                        <tr>
+                            <td>{{ approval.approval2meeting.meeting2forum.forum_name }}</td>
+                            <td>{{ approval.approval2meeting.meeting_date|date:"l, d M Y" }}</td>
+                            <td>Need Review & Approval</td>
+                            <td><a href="{% url 'pica:list_topic_review' approval.id %}"
+                                   class="btn btn-warning"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;&nbsp;Review</a>
+                            </td>
+                            <td>
+                                <a class='btn btn-success'
+                                   href="{% url 'pica:approve_meeting' approval.id %}"><i
+                                        class="fa-regular fa-thumbs-up"></i>&nbsp;&nbsp;Approval</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
+

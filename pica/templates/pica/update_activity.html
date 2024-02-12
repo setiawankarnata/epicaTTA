@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Activity{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Update Activity</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Activity Date :</label>
+                                <strong>{{ activity.activity_date | date:"l, d M Y" }}</strong>
+                            </div>
+                            <br>
+                            <div class="col-12 mt-3">
+                                <label class="form-label">Action/Description :</label>
+                                {% render_field form.action_description placeholder="Action/Description" class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-success mx-3"
+                                                type="submit">Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_update_activity' topic.id %}">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

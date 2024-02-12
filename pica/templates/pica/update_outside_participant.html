@@ -1,0 +1,72 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Outside Participant{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-3 mb-3">
+                <h3>Update Outside Participant</h3>
+            </div>
+            <div class="col-12">
+                <div>
+                    <a href="{% url 'pica:list_meeting' op %}" class="btn btn-danger"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back to List Meeting</a>
+                </div>
+            </div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>Participants Available</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>Participant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for outside in outsides %}
+                        <tr>
+                            {% if outside not in outsides_in_meeting %}
+                                <td>{{ outside.fullname }}</td>
+                                <td>
+                                    <a href="{% url 'pica:add_outside_to_meeting' meeting.id outside.id op %}"
+                                       class="btn btn-outline-warning"><i
+                                            class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1 mt-5"></div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>Participants in Meeting</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>Participant Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for outside in outsides_in_meeting %}
+                        <tr>
+                            <td>{{ outside.fullname }}</td>
+                            <td>
+                                <a href="{% url 'pica:delete_outside_from_meeting' meeting.id outside.id op %}"
+                                   class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

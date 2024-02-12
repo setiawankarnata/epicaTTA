@@ -1,0 +1,80 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Update Workflow{% endblock %}
+{% block content %}
+    <style>
+        .scroll {
+            height: 550px;
+            overflow: scroll;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-5 mb-5">
+                <h3>Update Workflow Forum {{ forum.forum_name }}</h3>
+            </div>
+            <div class="col-12">
+                <div>
+                    <a href="{% url 'pica:list_workflow' forum.id %}" class="btn btn-danger"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back to List Workflow</a>
+                </div>
+            </div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>BOD Available</h5>
+                </div>
+                <div class="scroll">
+                    <table class="table border border-1 border-dark">
+                        <thead>
+                        <tr class="table-secondary">
+                            <th>BOD Name</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for bod in bod_user %}
+                            {% if bod not in bod_workflow %}
+                                <tr>
+                                    <td>{{ bod.first_name }}&nbsp;{{ bod.last_name }}</td>
+                                    <td>
+                                        <a href="{% url 'pica:add_bod_to_workflow' bod.id forum.id %}"
+                                           class="btn btn-outline-warning"><i class="fa-solid fa-circle-plus"></i>&nbsp;&nbsp;Add</a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-1 mt-5"></div>
+            <div class="col-5 bg-light mt-3">
+                <div class="text-center">
+                    <h5>BOD in Workflow</h5>
+                </div>
+                <table class="table border border-1 border-dark">
+                    <thead>
+                    <tr class="table-secondary">
+                        <th>BOD Name</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for bod in bod_workflow %}
+                        <tr>
+                            <td>{{ bod.first_name }}&nbsp;{{ bod.last_name }}</td>
+                            <td>
+                                <a href="{% url 'pica:delete_bod_from_workflow' bod.id forum.id %}"
+                                   class="btn btn-outline-danger"><i
+                                        class="fa-solid fa-trash"></i>&nbsp;&nbsp;Remove</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

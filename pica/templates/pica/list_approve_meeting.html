@@ -1,0 +1,52 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}List Approve Meeting{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-5 mt-5">
+                <div>
+                    <a href="{% url 'pica:list_finish_check' %}" class="btn btn-primary"><i
+                            class="fa-solid fa-arrow-left"></i>&nbsp;&nbsp;Back to List
+                        Finish Check</a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5 bg-secondary text-white mt-3">
+                <div class="text-center fs-4">
+                    Status Approval
+                </div>
+                <table class="table table-light mt-3">
+                    <thead>
+                    <tr>
+                        <th>Approver</th>
+                        <th>Status</th>
+                        <th>Date Approval</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for approval in approvals %}
+                        <tr>
+                            <td>{{ approval.bod_name }}</td>
+                            {% if approval.approved == "Y" %}
+                                <td>Approved</td>
+                                <td>{{ approval.date_approved|date:"l, d M Y P" }}</td>
+                            {% else %}
+                                {% if approval.present == "P" %}
+                                    <td>Not Approved</td>
+                                {% else %}
+                                    <td>Absent</td>
+                                {% endif %}
+                                <td></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

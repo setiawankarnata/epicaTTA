@@ -1,0 +1,61 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Input Meeting{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-6 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-5">Input Data Meeting</legend>
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Meeting Forum :</label>
+                                {% render_field form.meeting2forum placeholder="Meeting Forum" class+="form-control" %}
+                            </div>
+                            <br>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Meeting Date :</label>
+                                {% render_field form.meeting_date class+="form-control" type="date" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Notulen :</label>
+                                {% render_field form.notulen placeholder="Notulen" class+="form-control" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Start Time :</label>
+                                {% render_field form.start_time class+="form-control" type="time" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">End Time :</label>
+                                {% render_field form.end_time class+="form-control" type="time" %}
+                            </div>
+                            <div class="col-4 mt-3">
+                                <label class="form-label">Location :</label>
+                                {% render_field form.location placeholder="Location" class+="form-control" %}
+                            </div>
+                        </div>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-warning mx-3"
+                                                type="submit"><i class="fa-solid fa-floppy-disk"></i>&nbsp;&nbsp;Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_meeting' op %}"><i class="fa-solid fa-ban"></i>&nbsp;&nbsp;Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}

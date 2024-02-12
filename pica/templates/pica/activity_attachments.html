@@ -1,0 +1,116 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}Activity Attachments{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8 bg-light mt-5 px-5">
+                <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <fieldset>
+                        <legend class="text-center fs-4 fw-bold mb-5 mt-2">Activity Attachments</legend>
+                        <div>
+                            <h6>Forum : {{ meeting.meeting2forum.forum_name }}</h6>
+                            <h6>Date : {{ meeting.meeting_date|date:"l, d M Y" }}</h6>
+                        </div>
+                        {% csrf_token %}
+                        <br>
+                        <p class="fw-bold">Total Size All Attachment : {{ total_size|filesizeformat }} (Max 25MB)</p>
+                        <div class="row mb-3">
+                            <div class="col-12 mt-3">
+                                <label class="form-label">File Attachment (only pdf files) :</label>
+                                {% render_field form.files1 class+="form-control" %}
+                                <div class="text-center text-danger">
+                                    {{ form.files1.errors }}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-12">
+                                <br>
+                                <h6>Uploaded Files (pdf):</h6>
+                                <table class="table table-bordered table-secondary">
+                                    <thead>
+                                    <tr>
+                                        <th>Name of file</th>
+                                        <th>Size</th>
+                                        <th>Action</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for doc in doc_pdfs %}
+                                        <tr>
+                                            <td>{{ doc.doc_pdf.name }}</td>
+                                            <td>{{ doc.doc_pdf.size|filesizeformat }}</td>
+                                            <td><a href="{{ doc.doc_pdf.url }}" class="btn btn-primary"
+                                                   target="_blank"><i
+                                                    class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                            </td>
+                                            <td><a href="{% url 'pica:delete_pdf' meeting.id doc.id %}"
+                                                   class="btn btn-danger"><i
+                                                    class="fa-solid fa-trash fa-lg"></i>&nbsp;Remove</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <label class="form-label">File Attachment (only jpeg/jpg/png files) :</label>
+                                {% render_field form.files2 class+="form-control" %}
+                                <div class="text-center text-danger">
+                                    {{ form.files2.errors }}
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-12 mt-3">
+                                <h6>Uploaded Files (jpeg/jpg/png):</h6>
+                                <table class="table table-bordered table-secondary">
+                                    <thead>
+                                    <tr>
+                                        <th>Name of file</th>
+                                        <th>Size</th>
+                                        <th>Action</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for doc in doc_images %}
+                                        <tr>
+                                            <td>{{ doc.doc_image.name }}</td>
+                                            <td>{{ doc.doc_image.size|filesizeformat }}</td>
+                                            <td><a href="{{ doc.doc_image.url }}" class="btn btn-primary"
+                                                   target="_blank"><i
+                                                    class="fa-solid fa-eye fa-lg"></i>&nbsp;View</a>
+                                            </td>
+                                            <td><a href="{% url 'pica:delete_image' meeting.id doc.id %}"
+                                                   class="btn btn-danger"><i
+                                                    class="fa-solid fa-trash fa-lg"></i>&nbsp;Remove</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row mb-5 mt-5">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center">
+                                    <div>
+                                        <button class="btn btn-success mx-3"
+                                                type="submit">Save
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-danger mx-3"
+                                           href="{% url 'pica:list_update_activity' topic.id %}">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    {#    {% include "base/footer.html" %}#}
+{% endblock %}
